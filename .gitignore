@@ -1,0 +1,10 @@
+#ignore all
+*
+
+#excludes
+!.cproject
+!.project
+!VGA.ioc
+!.c
+!.h
+!.gitignore
