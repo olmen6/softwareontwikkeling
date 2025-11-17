@@ -1,1 +1,11 @@
 .metadata
+#ignore all
+*
+
+#excludes
+!.cproject
+!.project
+!VGA.ioc
+!Core/
+!core/**
+!.gitignore
