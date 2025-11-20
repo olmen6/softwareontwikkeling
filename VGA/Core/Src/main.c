@@ -18,7 +18,8 @@
 int main(void)
 {
 	//turbo turbo   >:-)
-	//Aanpassing Melle laptop VScode via github desktop
+	//Aanpassing Melle laptop VScode via github desktop V2
+	
 	SystemInit(); // System speed to 168MHz
 
 	UB_VGA_Screen_Init(); // Init VGA-Screen
