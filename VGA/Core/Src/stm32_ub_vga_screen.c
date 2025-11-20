@@ -32,21 +32,21 @@ void P_VGA_InitINT(void);
 void P_VGA_InitDMA(void);
 
 
-//--------------------------------------------------------------
-// Init VGA-Module
-//--------------------------------------------------------------
+/**
+*	@brief initieert hsync, vsync, display buffer, io pins, timer, dma en de interrupt
+*/
 void UB_VGA_Screen_Init(void)
 {
-  uint16_t xp,yp;
+  uint16_t xcount,ycount;
 
   VGA.hsync_cnt=0;
   VGA.start_adr=0;
   VGA.dma2_cr_reg=0;
 
   // RAM init total black
-  for(yp=0;yp<VGA_DISPLAY_Y;yp++) {
-    for(xp=0;xp<(VGA_DISPLAY_X+1);xp++) {
-      VGA_RAM1[(yp*(VGA_DISPLAY_X+1))+xp]=0;
+  for(ycount=0;ycount<VGA_DISPLAY_Y;yp++) {
+    for(xcount=0;xcount<(VGA_DISPLAY_X+1);xcount++) {
+      VGA_RAM1[(ycount*(VGA_DISPLAY_X+1))+xcount]=0;
     }
   }
 
@@ -67,9 +67,10 @@ void UB_VGA_Screen_Init(void)
 }
 
 
-//--------------------------------------------------------------
-// fill the DMA RAM buffer with one color
-//--------------------------------------------------------------
+/**
+*	@brief zet elke pixel op het scherm op een gegeven kleur
+*	@param color 8 bit waarde wat aangeeft welke kleur (rgb) gebruikt moet worden
+*/
 void UB_VGA_FillScreen(uint8_t color)
 {
   uint16_t xp,yp;
@@ -82,10 +83,12 @@ void UB_VGA_FillScreen(uint8_t color)
 }
 
 
-//--------------------------------------------------------------
-// put one Pixel on the screen with one color
-// Important : the last Pixel+1 from every line must be black (don't know why??)
-//--------------------------------------------------------------
+/**
+*	@brief set een enkele pixel in het scherm op een gegeven kleur
+*	@param xp 16 bit waarde wat de x coördinaat aangeeft
+*	@param yp 16 bit waarde wat de y coördinaat aangeeft
+*	@param color 8 bit waarde wat aangeeft welke kleur (rgb) gebruikt moet worden
+*/
 void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color)
 {
   if(xp>=VGA_DISPLAY_X) xp=0;
@@ -96,10 +99,9 @@ void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color)
 }
 
 
-//--------------------------------------------------------------
-// interne Funktionen
-// init aller IO-Pins
-//--------------------------------------------------------------
+/**
+*	@brief initieert de IO pins, wordt aangeroepen door UB_VGA_Screen_Init(){}
+*/
 void P_VGA_InitIO(void)
 {
   GPIO_InitTypeDef  GPIO_InitStructure;
