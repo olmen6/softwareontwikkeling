@@ -32,9 +32,9 @@ void P_VGA_InitINT(void);
 void P_VGA_InitDMA(void);
 
 
-//--------------------------------------------------------------
-// Init VGA-Module
-//--------------------------------------------------------------
+/**
+ * 	@brief initieert het VGA scherm en al de vereiste timers en io
+ */
 void UB_VGA_Screen_Init(void)
 {
   uint16_t xp,yp;
@@ -67,9 +67,10 @@ void UB_VGA_Screen_Init(void)
 }
 
 
-//--------------------------------------------------------------
-// fill the DMA RAM buffer with one color
-//--------------------------------------------------------------
+/**
+ * 	@brief vult het gehele scherm met een gegeven kleur
+ * 	@param color, de rgb waarde van de gewenste kleur: 2 bits per subpixel
+ */
 void UB_VGA_FillScreen(uint8_t color)
 {
   uint16_t xp,yp;
@@ -82,10 +83,12 @@ void UB_VGA_FillScreen(uint8_t color)
 }
 
 
-//--------------------------------------------------------------
-// put one Pixel on the screen with one color
-// Important : the last Pixel+1 from every line must be black (don't know why??)
-//--------------------------------------------------------------
+/**
+ * 	@brief zet een enkele pixel op een gegeven kleur
+ * 	@param xp, 16 bit waarde wat de x-coördinaat aangeeft (is niet een pointer)
+ * 	@param yp, 16 bit waarde wat de y-coördinaat aangeeft (is niet een pointer)
+ * 	@param color, de rgb waarde van de gewenste kleur: 2 bits per subpixel
+ */
 void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color)
 {
   if(xp>=VGA_DISPLAY_X) xp=0;
@@ -96,10 +99,9 @@ void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color)
 }
 
 
-//--------------------------------------------------------------
-// interne Funktionen
-// init aller IO-Pins
-//--------------------------------------------------------------
+/**
+ * @brief initieert alle benodigde io pins voor het VGA scherm
+ */
 void P_VGA_InitIO(void)
 {
   GPIO_InitTypeDef  GPIO_InitStructure;
@@ -165,10 +167,9 @@ void P_VGA_InitIO(void)
 }
 
 
-//--------------------------------------------------------------
-// internal Function
-// init Timer
-//--------------------------------------------------------------
+/**
+ * 	@brief initieert en configureert de timers, configuraties zijn vast
+ */
 void P_VGA_InitTIM(void)
 {
   TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
@@ -237,10 +238,9 @@ void P_VGA_InitTIM(void)
 
 }
 
-//--------------------------------------------------------------
-// internal Function
-// init Interrupts
-//--------------------------------------------------------------
+/**
+ * 	@brief initieert de interrupts gebruikt door de VGA functies
+ */
 void P_VGA_InitINT(void)
 {
   NVIC_InitTypeDef NVIC_InitStructure;
@@ -278,10 +278,9 @@ void P_VGA_InitINT(void)
 }
 
 
-//--------------------------------------------------------------
-// internal Function
-// init DMA
-//--------------------------------------------------------------
+/**
+ * 	@brief initieert de dma (direct memory access) wat gebruikt wordt voor het aansturen van het VGA scherm
+ */
 void P_VGA_InitDMA(void)
 {
   DMA_InitTypeDef DMA_InitStructure;
@@ -321,12 +320,9 @@ void P_VGA_InitDMA(void)
 
 
 
-//--------------------------------------------------------------
-// Interrupt of Timer2
-//
-//   CC3-Interrupt    -> starts from DMA
-// Watch it.. higher troughput when interrupt flag is left alone
-//--------------------------------------------------------------
+/**
+ * 	@brief timer interrupt van de dma driver
+ */
 void TIM2_IRQHandler(void)
 {
 
@@ -377,12 +373,9 @@ void TIM2_IRQHandler(void)
 }
 
 
-//--------------------------------------------------------------
-// DMA Interrupt ISR
-//   after TransferCompleteInterrupt -> stop DMA
-//
-// still a bit buggy
-//--------------------------------------------------------------
+/**
+ * 	@brief inerrupt gebruikt door de dma, vereist nog veel werk en bugfixing
+ */
 void DMA2_Stream5_IRQHandler(void)
 {
   if(DMA_GetITStatus(DMA2_Stream5, DMA_IT_TCIF5))
