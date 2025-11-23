@@ -17,6 +17,7 @@
 
 int main(void)
 {
+	//turbo turbo   >:-)
 	SystemInit(); // System speed to 168MHz
 
 	UB_VGA_Screen_Init(); // Init VGA-Screen
