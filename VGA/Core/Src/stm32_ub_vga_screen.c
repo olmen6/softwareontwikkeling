@@ -85,8 +85,8 @@ void UB_VGA_FillScreen(uint8_t color)
 
 /**
  * 	@brief zet een enkele pixel op een gegeven kleur
- * 	@param xp, 16 bit waarde wat de x-coÃ¶rdinaat aangeeft (is niet een pointer)
- * 	@param yp, 16 bit waarde wat de y-coÃ¶rdinaat aangeeft (is niet een pointer)
+ * 	@param xp, 16 bit waarde wat de x-coördinaat aangeeft (is niet een pointer)
+ * 	@param yp, 16 bit waarde wat de y-coördinaat aangeeft (is niet een pointer)
  * 	@param color, de rgb waarde van de gewenste kleur: 2 bits per subpixel
  */
 void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color)
@@ -406,5 +406,6 @@ void DMA2_Stream5_IRQHandler(void)
     GPIOE->BSRRH = VGA_GPIO_HINIBBLE;
   }
 }
+
 
 
